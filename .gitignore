@@ -1,0 +1,13 @@
+.ei_api_key
+*.key
+*_key.txt
+api_keys/
+
+
+.env
+.env.local
+.env.*.local
+
+
+*.tmp
+*.bak
