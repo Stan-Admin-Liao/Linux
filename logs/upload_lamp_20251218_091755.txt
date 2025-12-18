@@ -1,0 +1,24 @@
+Edge Impulse uploader v1.36.1
+Endpoints:
+    API:         https://studio.edgeimpulse.com
+    Ingestion:   https://ingestion.edgeimpulse.com
+
+Upload configuration:
+    Label:       lamp
+    Category:    training
+
+Uploading to project "gtang-3000 / gtang-3000-project-1" (https://studio.edgeimpulse.com/studio/854983)
+
+[ 1/11] Failed to upload data/collected/lamp/30_screensa.12.2025.png An item with this hash already exists (ids: 2469000698)
+[ 2/11] Failed to upload data/collected/lamp/30_screenshot_a12.2025.png An item with this hash already exists (ids: 2469001083)
+[ 3/11] Uploading data/collected/lamp/dnshot_17.12.2025.png OK (2395 ms)
+[ 4/11] Failed to upload data/collected/lamp/30_screensha2025.png An item with this hash already exists (ids: 2469000749)
+[ 5/11] Failed to upload data/collected/lamp/30_screena.2025.png An item with this hash already exists (ids: 2469000687)
+[ 6/11] Failed to upload data/collected/lamp/30_aot_17.12.2025.png An item with this hash already exists (ids: 2469000667)
+[ 7/11] Failed to upload data/collected/lamp/30_screenshot_17.12.2025.png An item with this hash already exists (ids: 2469000940)
+[ 8/11] Failed to upload data/collected/lamp/30anshot_17.12.2025.png An item with this hash already exists (ids: 2469000660)
+[ 9/11] Failed to upload data/collected/lamp/30_scranshot_17.12.2025.png An item with this hash already exists (ids: 2469000677)
+[10/11] Failed to upload data/collected/lamp/31screenshot_17.12.2025.png An item with this hash already exists (ids: 2469001088)
+[11/11] Failed to upload data/collected/lamp/30_screa.12.2025.png An item with this hash already exists (ids: 2469000682)
+
+Done. Files uploaded successful: 1. Files that failed to upload: 10.

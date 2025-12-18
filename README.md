@@ -1,1 +1,7 @@
-##I can't input chinese
+#edge impulse測試
+目前進度在14周
+13周內容有些沒做
+
+[OID](https://github.com/EscVM/OIDv4_ToolKit)
+[iclass](https://iclass.tku.edu.tw/course/254600)
+
