@@ -1,0 +1,13 @@
+Edge Impulse uploader v1.36.1
+Endpoints:
+    API:         https://studio.edgeimpulse.com
+    Ingestion:   https://ingestion.edgeimpulse.com
+
+Upload configuration:
+    Label:       lamp
+    Category:    training
+
+Uploading to project "gtang-3000 / gtang-3000-project-1" (https://studio.edgeimpulse.com/studio/854983)
+
+
+Done. Files uploaded successful: 0. Files that failed to upload: 0.

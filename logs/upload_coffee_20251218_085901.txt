@@ -1,0 +1,1 @@
+Edge Impulse uploader v1.36.1
