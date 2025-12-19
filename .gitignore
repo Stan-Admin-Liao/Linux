@@ -1,13 +1,29 @@
+# API Keys
 .ei_api_key
 *.key
 *_key.txt
-api_keys/
-
-
 .env
-.env.local
-.env.*.local
+#
+data/collected/**/*.jpg
+data/collected/**/*.png
+data/upload_test/*.jpg
+#
+!data/collected/.gitkeep
+!data/upload_test/.gitkeep
 
+#
+*.eim
+*.tflite
 
-*.tmp
-*.bak
+#
+logs/*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+#
+.vscode/
+.idea/
+*.swp
