@@ -7,7 +7,7 @@ echo "------------------------------------------------"
 echo "Edge Impulse 資料處理工具箱"
 echo "1: 上傳單一標籤 (Upload Data)"
 echo "2: 批次資料夾上傳 (Batch Upload)"
-echo "3: 自動繪製標籤框 (Bounding Box Process)"
+echo "3: 辨識圖片 (run inference)"
 echo "------------------------------------------------"
 read -p "請選擇指令 [1-3]: " command
 
@@ -22,9 +22,8 @@ case "$command" in
         bash scripts/batch_upload.sh "$DATA_DIR"
         ;;
     3)
-        read -p "Enter label name: " LABEL
         read -e -p "Enter input image directory: " IMG_DIR
-        python3 scripts/bounding_box.py "$LABEL" "$IMG_DIR"
+        bash scripts/run_inference.sh "$IMG_DIR"
         ;;
     *)
         echo "無效選項，退出中..."

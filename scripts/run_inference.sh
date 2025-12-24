@@ -36,10 +36,10 @@ log_error "can not find model: $MODEL_PATH"
 exit 1
 fi
 
-if [ ! -f "$IMAGE_PATH" ]; then
-log_error "can not find image: $IMAGE_PATH"
-exit 1
-fi
+#if [ ! -f "$IMAGE_PATH" ]; then
+#log_error "can not find image: $IMAGE_PATH"
+#exit 1
+#fi
 
 #
 log_info "..."
