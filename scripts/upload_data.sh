@@ -91,7 +91,7 @@ edge-impulse-uploader \
     --api-key "$EI_API_KEY" \
     --category "$MODE" \
     --label "$LABEL" \
-    "${FILES[@]}" 2>&1 | tee "$LOG_FILE"
+    "${FILES[@]}" 2>&1 | grep -E "\[[0-9]+/[0-9]+\]|Failed|Success|Done" | tee "$LOG_FILE"
 
 
 log_info "日誌: $LOG_FILE"
