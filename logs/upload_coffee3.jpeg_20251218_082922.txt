@@ -1,8 +1,0 @@
-Edge Impulse uploader v1.36.1
-Endpoints:
-    API:         https://studio.edgeimpulse.com
-    Ingestion:   https://ingestion.edgeimpulse.com
-
-Upload configuration:
-    Label:       coffee3.jpeg
-    Category:    training
