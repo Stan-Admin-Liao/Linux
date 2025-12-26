@@ -14,7 +14,7 @@ log_error()   { echo -e "${RED}[ERROR]${NC} $1" >&2; }
 log_warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
 
 # --- 預設值 ---
-MODE="training" # 預設模式
+MODE="split" # 預設模式
 LABEL=""
 FILES=()
 LOG_DIR="logs"
@@ -46,11 +46,11 @@ fi
 # --- 參數解析 (已刪除 --category) ---
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        -s|--split)
-            MODE="split"
+        --train)
+            MODE="training"
             shift
             ;;
-        -t|--test)
+        --test)
             MODE="testing"
             shift
             ;;
