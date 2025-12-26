@@ -1,18 +1,17 @@
 #!/bin/bash
 
 # --- 參數設定 ---
-PROJECT_ID="855277"
-LEARN_ID="8"
 
 if [ -z "$EI_API_KEY" ]; then
     echo "❌ 錯誤：環境變數 \$EI_API_KEY 為空，請先執行 export EI_API_KEY='你的Key'"
     exit 1
 fi
 
-echo "🚀 [Edge Impulse] 觸發專案 $PROJECT_ID 訓練 (ID: $LEARN_ID)..."
+echo "🚀 [Edge Impulse] 觸發專案 $PROJECT_ID 訓練 (ID: $LEARNING_BLOCK_ID)..."
 
 # 1. 發送觸發請求
-RESPONSE=$(curl -s -X POST "https://studio.edgeimpulse.com/v1/api/${PROJECT_ID}/jobs/train/keras/${LEARN_ID}" \
+RESPONSE=$(curl -s -X POST \
+  "https://studio.edgeimpulse.com/v1/api/${PROJECT_ID}/jobs/train/keras/${LEARNING_BLOCK_ID}" \
   -H "x-api-key: ${EI_API_KEY}" \
   -H "Content-Type: application/json" \
   -d '{"mode": "visual"}')
@@ -24,7 +23,7 @@ if [[ "$RESPONSE" != *"success\":true"* ]]; then
 fi
 
 echo "✅ 訓練已成功啟動！"
-echo "⏳ 等待所有作業完成 (監控 totalJobCount)..."
+echo "⏳ 等待所有作業完成 ..."
 
 # 2. 監控總作業數是否歸零
 # 先等待 5 秒，確保伺服器已將作業排入隊列
