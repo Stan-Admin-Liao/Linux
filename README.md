@@ -43,15 +43,11 @@ edge_impulse_demo
 │   ├── ERROR.md
 │   ├── new_data
 │   ├── PRTSC.md
-│   │   ├── pic1.png
-│   │   ├── pic2.png
-│   │   ├── pic3.png
-│   │   ├── pic4.png
-│   │   └── pic5.png
+│   │   └──  .png
 │   ├── setup.md
 │   └── Usage.md
 ├── logs
-│   └── upload_glass_split_20251227_091107.log
+│   └── .log
 ├── models
 │   ├── model2.eim
 │   ├── model3.eim
