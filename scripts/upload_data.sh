@@ -27,13 +27,12 @@ show_usage() {
     echo "  $0 [選項] <標籤> <檔案...>"
     echo ""
     echo "選項:"
-    echo "  -s, --split   自動分配模式 (8:2 分配至訓練集與測試集)"
-    echo "  -t, --test    強制上傳至測試集 (Testing)"
+    echo "  --train   自動分配模式 (8:2 分配至訓練集與測試集)"
+    echo "  --test    強制上傳至測試集 (Testing)"
     echo "  (無選項)      預設上傳至訓練集 (Training)"
     echo ""
     echo "範例:"
-    echo "  ./upload_data.sh -s coffee *.jpg    # 自動分配 8:2"
-    echo "  ./upload_data.sh noise 01.wav       # 上傳至訓練集"
+    echo "  ./upload_data.sh --train coffee *.jpg "
     exit 0
 }
 

@@ -6,7 +6,7 @@ from edge_impulse_linux.runner import ImpulseRunner
 
 def main():
     if len(sys.argv) != 3:
-        print("使用方式: python3 classify_od.py <model.eim路徑> <圖片資料夾路徑>")
+        print("使用方式: python3 classify_image.py <model.eim路徑> <圖片資料夾路徑>")
         sys.exit(1)
     
     model_path = sys.argv[1]
@@ -14,14 +14,18 @@ def main():
     output_dir = "processed_results"
     os.makedirs(output_dir, exist_ok=True)
     
+    # 初始化 Runner
     runner = ImpulseRunner(model_path)
     
     try:
         model_info = runner.init()
+        # 從 model_parameters 獲取資訊，避開可能缺失的 project['sensortype']
         target_width = model_info['model_parameters']['image_input_width']
         target_height = model_info['model_parameters']['image_input_height']
         
-        # 修正 1: 支援多種副檔名
+
+        is_grayscale = True 
+
         image_files = []
         for ext in ('*.png', '*.jpg', '*.jpeg', '*.bmp'):
             image_files.extend(glob.glob(os.path.join(image_dir, ext)))
@@ -30,7 +34,9 @@ def main():
             print(f"在 {image_dir} 中找不到任何圖片。")
             return
 
-        print(f"🚀 模型載入成功，開始處理 {len(image_files)} 張圖片...")
+        print(f"🚀 模型載入成功！")
+        print(f"模型輸入尺寸: {target_width}x{target_height} ({'灰階' if is_grayscale else '彩色'})")
+        print(f"開始處理 {len(image_files)} 張圖片...\n")
 
         for img_path in image_files:
             img = cv2.imread(img_path)
@@ -38,48 +44,48 @@ def main():
                 print(f"跳過: 無法讀取 {img_path}")
                 continue
             
-            orig_h, orig_w = img.shape[:2]
-            
-            # 前處理 (BGR -> Gray)
+            # --- 圖片前處理 ---
+            # 1. 轉為 RGB
             img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2GRAY)
-            img_resized = cv2.resize(img_gray, (target_width, target_height))
-            img_processed = img_resized.astype('float32').flatten()
+            # 2. 縮放
+            img_resized = cv2.resize(img_rgb, (target_width, target_height))
             
-            # 執行推論
-            result = runner.classify(img_processed)
-            
-            # 檢查是否有物件
-            if 'bounding_boxes' in result['result']:
-                boxes = result['result']['bounding_boxes']
-                print(f"[{os.path.basename(img_path)}] 偵測到 {len(boxes)} 個物件")
-                
-                for box in boxes:
-                    label = box['label']
-                    score = box['value']
-                    if score < 0.5: continue  # 過濾低信心度
-
-                    scale_x, scale_y = orig_w / target_width, orig_h / target_height
-                    x, y = int(box['x'] * scale_x), int(box['y'] * scale_y)
-                    w, h = int(box['width'] * scale_x), int(box['height'] * scale_y)
-                    
-                    # 繪圖
-                    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                    cv2.putText(img, f"{label} {score:.2f}", (x, y - 10),
-                                cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-
-                # 修正 2: 儲存位置移到這裡（處理完所有框後存一次）
-                filename = os.path.basename(img_path)
-                save_path = os.path.join(output_dir, f"Labeled_{filename}")
-                cv2.imwrite(save_path, img)
+            # 3. 如果是灰階模型，必須轉為單通道
+            if is_grayscale:
+                img_final = cv2.cvtColor(img_resized, cv2.COLOR_RGB2GRAY)
             else:
-                print(f"[{os.path.basename(img_path)}] 沒有偵測到物件")
+                img_final = img_resized
 
-            print(f"耗時: {result['timing']['dsp'] + result['timing']['classification']} ms")
+            # 4. 展平 (Flatten) 數據
+            img_features = img_final.flatten().tolist()
+            
+            # --- 執行推論 ---
+            res = runner.classify(img_features)
+            
+            # --- 處理分類結果 ---
+            if 'classification' in res['result']:
+                predictions = res['result']['classification']
+                
+                # 找出最高分的類別
+                top_label = max(predictions, key=predictions.get)
+                top_score = predictions[top_label]
+                
+                print(f"[{os.path.basename(img_path)}] 結果: {top_label} ({top_score:.2f})")
+                
+                # 在原始圖上標註文字
+                display_text = f"{top_label}: {top_score:.2f}"
+                cv2.putText(img, display_text, (20, 50),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 3)
+
+                # 儲存圖片
+                filename = os.path.basename(img_path)
+                cv2.imwrite(os.path.join(output_dir, f"Result_{filename}"), img)
+            else:
+                print(f"[{os.path.basename(img_path)}] 錯誤: 無法獲得分類數據")
 
     finally:
         runner.stop()
-        print("推論引擎關閉。")
+        print("\n任務完成，推論引擎已關閉。")
 
 if __name__ == "__main__":
     main()

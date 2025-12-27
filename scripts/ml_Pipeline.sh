@@ -7,7 +7,7 @@ while true; do
 	echo "2: 上傳圖片"
 	echo "3: 批次資料夾上傳 "
 	echo "4: retrain"
-	echo "5: 辨識圖片退出腳本"
+	echo "5: 辨識圖片"
 	echo "6: 退出腳本"
 	echo "------------------------------------------------"
 	read -p "請選擇指令 [1-6]: " choice

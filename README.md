@@ -36,6 +36,36 @@ Bash
 
     bash scripts/run_inference.sh
 
+專案結構
+```
+edge_impulse_demo
+├── data
+│   ├── ERROR.md
+│   ├── new_data
+│   ├── PRTSC.md
+│   │   └──  .png
+│   ├── setup.md
+│   └── Usage.md
+├── logs
+│   └── .log
+├── models
+│   ├── model2.eim
+│   ├── model3.eim
+│   └── model.eim
+├── processed_results
+├── README.md
+└── scripts
+    ├── batch_upload.sh
+    ├── check_env.sh
+    ├── classify_od.py
+    ├── ml_Pipeline.sh
+    ├── retrain.sh
+    ├── run_inference.sh
+    └── upload_data.sh
+```
+
+
+
 👥 開發成員
 
   李吉海
