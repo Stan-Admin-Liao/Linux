@@ -9,6 +9,9 @@ fi
 
 echo "🚀 [Edge Impulse] 觸發專案 $PROJECT_ID 訓練 (ID: $LEARNING_BLOCK_ID)..."
 
+FIRST_JOB_COUNT=$(curl -s https://studio.edgeimpulse.com/v1/api/${PROJECT_ID}/jobs \
+        -H "x-api-key: ${EI_API_KEY}" | jq '.totalJobCount')
+
 # 1. 發送觸發請求
 RESPONSE=$(curl -s -X POST \
   "https://studio.edgeimpulse.com/v1/api/${PROJECT_ID}/jobs/train/keras/${LEARNING_BLOCK_ID}" \
@@ -35,8 +38,8 @@ while true; do
         -H "x-api-key: ${EI_API_KEY}" | jq '.totalJobCount')
 
     # 如果 count 是 0，表示沒有正在進行的作業
-    if [ "$JOB_COUNT" -eq 0 ]; then
-        echo -e "\n🎉 [完成] 所有作業已結束 (totalJobCount = 0)。"
+    if [ "$JOB_COUNT" -eq $FIRST_JOB_COUNT ]; then
+        echo -e "\n🎉 [完成] 所有作業已結束 "
         break
     fi
 
