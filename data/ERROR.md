@@ -35,4 +35,19 @@ URL 路徑不正確
 https://docs.edgeimpulse.com/apis
 ![picture](PRTSC/pic5.png)
 
+## Git Pull Failed (Merge Conflict)
+![picture](PRTSC/pic6.png)
+
+### 問題原因
+在 `batch_upload.sh` 檔案中發生合併衝突 (Merge Conflict)。
+具體原因為：本地端 (Local) 與最新 fetch 下來的遠端 (Origin) 版本中，在同一個檔案的同一段落或相鄰行數，雙方都有不同的修改內容，導致 Git 無法自動合併。
+
+### 解決方式
+1. 如果不在乎原本的檔案（放棄本地修改）：
+輸入以下指令，這將會強制使用遠端 `main` 分支的版本覆蓋本地版本：
+```bash
+git reset --hard origin/main
+```
+如果需要保留本地修改（手動解決衝突）： 必須依照圖片指示對 batch_upload.sh 進行改動。 請開啟該檔案，搜尋衝突標記（<<<<<<<, =======, >>>>>>>），手動判斷並修改程式碼以解決衝突，完成後再進行 add 與 commit。
+
 
