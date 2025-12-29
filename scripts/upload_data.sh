@@ -14,7 +14,7 @@ log_error()   { echo -e "${RED}[ERROR]${NC} $1" >&2; }
 log_warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
 
 # --- 預設值 ---
-MODE="split" # 預設模式
+MODE="split" 
 LABEL=""
 FILES=()
 LOG_DIR="logs"
@@ -27,22 +27,23 @@ show_usage() {
     echo "  $0 [選項] <標籤> <檔案...>"
     echo ""
     echo "選項:"
-    echo "  --train   自動分配模式 (8:2 分配至訓練集與測試集)"
-    echo "  --test    強制上傳至測試集 (Testing)"
-    echo "  (無選項)      預設上傳至訓練集 (Training)"
+    echo "  --train   	上傳至訓練集 (Training)"
+    echo "  --test    	強制上傳至測試集 (Testing)"
+    echo "  (無選項)      預設自動分配模式 (8:2 分配至訓練集與測試集)"
     echo ""
     echo "範例:"
-    echo "  ./upload_data.sh --train coffee *.jpg "
+    echo "  $0  --train coffee *.jpg "
     exit 0
 }
 
 # --- 檢查環境變數 ---
 if [ -z "$EI_API_KEY" ]; then
-    log_error "未設定 EI_API_KEY。請執行: export EI_API_KEY='your_key'"
+    log_error "未設定 EI_API_KEY。"
+    log_error "請執行: export EI_API_KEY='your_key'"
     exit 1
 fi
 
-# --- 參數解析 (已刪除 --category) ---
+# --- 參數解析 ---
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --train)
@@ -75,6 +76,12 @@ done
 if [ -z "$LABEL" ] || [ ${#FILES[@]} -eq 0 ]; then
     log_error "錯誤: 必須提供標籤與檔案。"
     show_usage
+    exit 1
+fi
+#確認檔案路徑
+if [ ! -e "${FILES[0]}" ]; then
+    log_error "錯誤: 指定的路徑不存在 -> ${FILES[0]}"
+    exit 1
 fi
 
 # --- 執行上傳 ---
