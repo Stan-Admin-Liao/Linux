@@ -1,6 +1,5 @@
-
 # edge impulse 分類模型
-簡介
+## 簡介
 在 Linux 上使用 Edge Impulse 進行資料收集與模型推論的專案。
 透過編寫 Shell Script 整合 Edge Impulse CLI，實現了從本地端上傳到雲端訓練模型。
 用於分類玻璃 鐵罐 紙等回收物。
@@ -8,9 +7,16 @@
 ---
 
 - [edge impulse 分類模型](#)
+  - [簡介](#簡介)
   - [專案結構](#專案結構)
   - [安裝指南](#安裝指南)
+    - [更新系統套件](#更新系統套件)
+    - [安裝基本工具](#安裝基本工具)
+    - [安裝 Node.js 與 npm](#安裝-Node.js-與-npm)
+    - [安裝 Edge Impulse 相關工具](#安裝-Edge-Impulse-相關工具)
   - [環境檢查](#環境檢查)
+    - [專案權限設定](#專案權限設定)
+    - [環境檢查](#環境檢查)
   - [參考文獻＆連結](#參考文獻＆連結)
   - [開發成員](#開發成員)
 
@@ -22,14 +28,12 @@ edge_impulse_demo
 ├── data
 │   ├── ERROR.md
 │   ├── new_data
-│   ├── PRTSC.md
+│   ├── PRTSC
 │   ├── setup.md
 │   └── Usage.md
 ├── logs
 ├── models
-│   ├── model2.eim
-│   ├── model3.eim
-│   └── model.eim
+│   └── model3.eim
 ├── processed_results
 ├── README.md
 └── scripts
@@ -83,6 +87,7 @@ edge_impulse_demo
     edge-impulse-linux-runner --version
 ```
 
+---
 
 ## 環境變數設定
 本專案需使用 Edge Impulse API Key 與 Project ID
@@ -97,7 +102,7 @@ edge_impulse_demo
     echo $PROJECT_ID
 ```
 
-## 專案權限設定
+### 專案權限設定
 進入專案根目錄後，設定所有腳本為可執行：
 
 ```bash
@@ -111,7 +116,7 @@ edge_impulse_demo
 此動作已在 update.sh 中自動處理，但仍建議確認
 ---
 
-## 環境檢查
+### 環境檢查
 
 執行環境檢查腳本以確認所有設定是否完成：
 
