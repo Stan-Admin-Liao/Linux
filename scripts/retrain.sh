@@ -49,8 +49,8 @@ while true; do
 
   
     if [ "$JOB_COUNT" -eq $FIRST_JOB_COUNT ]; then
-    	printf "\r                 \r"
-        log_info "\n🎉 [完成] 所有作業已結束 "
+    	printf "\r                                         \r"
+        log_info "🎉 [完成] 所有作業已結束 "
         break
     fi
 
