@@ -2,7 +2,7 @@
 ---
 ## 檢查環境
 ### ./scripts/check_env.sh
-輸入後直接看結果缺什麼就好了
+輸入後直接看結果缺什麼就好了 惟須注意版本衝突問題
 
 ![picture](PRTSC/check_env.png)
 
