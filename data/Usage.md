@@ -4,7 +4,7 @@
 ### ./scripts/check_env.sh
 輸入後直接看結果缺什麼就好了
 
-![picture](PRTSC/check_env.gng)
+![picture](PRTSC/check_env.png)
 
 ## 上傳圖片
 ### ./scripts/upload_data.sh  [選項] <標籤> <圖片路徑 or 資料夾路徑>
@@ -23,7 +23,7 @@
 
 ![picture](PRTSC/b_upload1.png)
 
-![picture](PRTSC/B_upload2.png)
+![picture](PRTSC/b_upload2.png)
 
 ## 重新訓練模型
 ### ./scripts/retrain.sh
